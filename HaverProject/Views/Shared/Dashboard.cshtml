@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, auto);
+        }
+
+        .grid-item {
+            border: none;
+            padding: 20px;
+            text-align: center;
+        }
+
+            .grid-item:nth-child(1) {
+                grid-row: span 3;
+                grid-column: 1;
+            }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align:center">Dashboard</h1>
+    <div class="container">
+        <div class="mb-2">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (User.IsInRole("Admin") || User.IsInRole("QualityInspector"))
+                {
+                    <a asp-action="Create" asp-controller="NCR" class="btn btn-sm btn-outline-success"
+                       role="button" data-bs-toggle="tooltip">
+                        <strong>Create New NCR</strong>
+                    </a>
+                }
+            }
+        </div>
+        <div class="grid-container">
+            <div class="grid-item">
+                <a href="@Url.Action("Index", "NCR")" class="text-decoration-none text-dark">
+                    <div class="p-3 mb-3 bg-light border shadow-sm d-flex justify-content-around align-items-center rounded h-100">
+                        <div>
+                            <h3 class="fs-2" asp-controller="NCR">@ViewData["AllNcrCount"]</h3>
+                            <p class="fs-5">All NCRs</p>
+                        </div>
+                        <i class="fa-solid fa-list-ol fa-3x"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="grid-item">
+                <a href="@Url.Action("EngineeringNcr", "NCR")" class="text-decoration-none text-dark">
+                    <div class="p-3 mb-3 bg-light border shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div>
+                            <h3 class="fs-2" asp-controller="NCR">@ViewData["EngineeringNcrCount"]</h3>
+                            <p class="fs-5">NCRs</p>
+                            <figcaption class="blockquote-footer">Engineering Stage</figcaption>
+                        </div>
+                        <i class="fa-solid fa-gears fa-3x"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="grid-item">
+                <a href="@Url.Action("PurchaseNcr", "NCR")" class="text-decoration-none text-dark">
+                    <div class="p-3 mb-3 bg-light border shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div>
+                            <h3 class="fs-2" asp-controller="NCR">@ViewData["PurchaseNcrCount"]</h3>
+                            <p class="fs-5">NCRs</p>
+                            <figcaption class="blockquote-footer">Purchase Stage</figcaption>
+                        </div>
+                        <i class="fa-solid fa-circle-check fa-3x"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="grid-item">
+                <a href="@Url.Action("ReviewNcr", "NCR")" class="text-decoration-none text-dark">
+                    <div class="p-3 mb-3 bg-light border shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div>
+                            <h3 class="fs-2" asp-controller="NCR">@ViewData["ReviewNcrCount"]</h3>
+                            <p class="fs-5">NCRs</p>
+                            <figcaption class="blockquote-footer">Review Stage</figcaption>
+                        </div>
+                        <i class="fa-solid fa-user-check fa-3x"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="grid-item">
+                <a href="@Url.Action("ClosedNcr", "NCR")" class="text-decoration-none text-dark">
+                    <div class="p-3 mb-3 bg-light border shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div>
+                            <h3 class="fs-2" asp-controller="NCR">@ViewData["ClosedNcrCount"]</h3>
+                            <p class="fs-5">NCRs</p>
+                            <figcaption class="blockquote-footer">Closed Stage</figcaption>
+                        </div>
+                        <i class="fa-solid fa-lock fa-3x"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="grid-item">
+                <a href="@Url.Action("ArchievedNcr", "NCR")" class="text-decoration-none text-dark">
+                    <div class="p-3 mb-3 bg-light border shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div>
+                            <h3 class="fs-2" asp-controller="NCR">@ViewData["ArchievedNcrCount"]</h3>
+                            <p class="fs-5">Archived NCRs</p>
+                        </div>
+                        <i class="fa-regular fa-folder-closed fa-3x"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="grid-item">
+                <a href="@Url.Action("VoidNcr", "NCR")" class="text-decoration-none text-dark">
+                    <div class="p-3 mb-3 bg-light border shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div>
+                            <h3 class="fs-2" asp-controller="NCR">@ViewData["VoidNcrCount"]</h3>
+                            <p class="fs-5">Void NCRs</p>
+                        </div>
+                        <i class="fa-regular fa-circle-xmark fa-3x"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
